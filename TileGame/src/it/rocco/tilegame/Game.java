@@ -9,6 +9,8 @@ import it.rocco.tilegame.display.Display;
 import it.rocco.tilegame.gfx.Assets;
 import it.rocco.tilegame.gfx.ImageLoader;
 import it.rocco.tilegame.gfx.SpriteSheet;
+import it.rocco.tilegame.state.GameState;
+import it.rocco.tilegame.state.State;
 
 /* questa sarà la classe principale del gioco.
  * Viene chiamata dalla classe "Launcher".
@@ -26,6 +28,9 @@ public class Game implements Runnable {
 	private BufferStrategy bs;
 	private Graphics g;
 	
+	//states
+	private State gameState;
+	
 	public Game (String title, int widht, int height) {
 		/* assegno i parametri che servono
 		 * a questa classe per far visualizzare il display */
@@ -42,10 +47,18 @@ public class Game implements Runnable {
 		display = new Display (title, widht, height); // creo una istanza della classe Display 
 		Assets.init();
 		
+		gameState = new GameState();
+		State.setState(gameState);
+		
 	}
 	
+
+
 	// aggiorna variabili, posizioni, oggetti, ecc.
 	public void tick () {
+		
+		if (State.getState() != null)
+			State.getState().tick();
 		
 	}
 	
@@ -62,51 +75,51 @@ public class Game implements Runnable {
 		g.clearRect(0, 0, widht, height);
 		// start drawing
 		
-		g.drawImage(Assets.player, 0, 0, null);
-		g.drawImage(Assets.dirt, 33, 0, null);
-		g.drawImage(Assets.grass, 66, 0, null);
-		g.drawImage(Assets.stone, 0, 33, null);
-		g.drawImage(Assets.tree, 33, 33, null);
-		g.drawImage(Assets.tree, 66, 66, null);
-		
-		
+		if (State.getState() != null)
+		State.getState().render(g);
+	
 		// end drawing
 		bs.show();
 		g.dispose();
 		
 	}
 	
-	/* dentro la classe, o alla fine, deve esserci questo metodo (public void run() ).
-	 * Se permetto alla classe di avviare un thread.
-	 * in questo metodo verrà scritta la maggior parte del codice del gioco
-	 * game loop compreso:
-	 * 
-     *     (DIAGRAMMA GAME LOOP)
-	 * 				  ---------------------  
-	 * 				  |                   | 
-	 * --------------------------------   |
-	 * | AGGIORNA TUTTE LE VARIABILI, |   | 	
-	 * | POSIZIONI, OGGETTI, ECC. 	  |   |
-	 * |   (con metodo "update")	  |   |
-	 * --------------------------------   |
-	 * 				  |                   |
-	 * --------------------------------   |
-	 * |    DISEGNA  TUTTO SULLO      |   |
-	 * |  	       SCHERMO			  |	  |
-	 * |     (con metodo "render") 	  |   |
-	 * --------------------------------   |
-	 * 				  |                   |
-	 *                ---------------------
-	 */ 
+	
+	/* Se permetto alla classe di avviare un thread dentro la classe deve esserci questo metodo (public void run()).
+	 * Inizia il game loop (running diventa true) che richiama i metodi "tick" e "render" 
+	 * e limita il richiamo di questi metodi a 60 volte al secondo (FPS) (serve per avere la stessa
+	 * velocità di esecuzione su tutti i tipo di computer, veloci e meno veloci) */
 	public void run () {
-		//richiama il metodo init che inizializza la grafica del gioco
+		
 		init(); 
 		
-		
-		// inizia il game loop (running diventa true) che richiama i metodi "update" e "render"
-		while (running) {  
-			tick();
-			render();
+		int fps = 60;
+		double timePerTick = 1000000000 / fps;
+		double delta = 0;
+		long now;
+		long lastTime = System.nanoTime();
+		long timer = 0;
+		int ticks = 0;
+
+		while (running) {
+			now = System.nanoTime();
+			delta += (now - lastTime) / timePerTick;
+			timer += now  - lastTime;
+			lastTime = now;
+			
+			if (delta >= 1) {
+				tick();
+				render();
+				ticks ++;
+				delta --;
+			}
+			
+			if(timer >= 1000000000) {
+				System.out.println("FPS: " + ticks);
+				ticks = 0;
+				timer = 0;
+			}
+				
 		}
 		stop(); //stoppa il thread se ancora non è stoppato (running diventa false)
 				
