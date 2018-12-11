@@ -13,7 +13,7 @@ import java.awt.Dimension;
 		private String title;
 		private int widht, height;
 	
-	//costruttore del frame. Riceve titolo, larghezza e altezza.
+	//costruttore del frame. Riceve titolo, larghezza e altezza
 	public Display (String title, int widht, int height) {
 		this.title = title;
 		this.widht = widht;
@@ -24,7 +24,7 @@ import java.awt.Dimension;
 	}
 	
 	private void createDisplay() {
-		// assegno i parametri all'oggetto frame
+		// assegno i parametri all'oggetto frame.
 		frame = new JFrame (title);
 		frame.setSize (widht, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
