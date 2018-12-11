@@ -1,9 +1,12 @@
 package it.rocco.tilegame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 import it.rocco.tilegame.display.Display;
+import it.rocco.tilegame.gfx.ImageLoader;
 
 /* questa sarà la classe principale del gioco.
  * Viene chiamata dalla classe "Launcher".
@@ -22,6 +25,8 @@ public class Game implements Runnable {
 	private Graphics g;
 	
 	
+	private BufferedImage testImg;
+	
 	public Game (String title, int widht, int height) {
 		/* assegno i parametri che servono
 		 * a questa classe per far visualizzare il display */
@@ -36,7 +41,7 @@ public class Game implements Runnable {
 	public void init() {
 		
 		display = new Display (title, widht, height); // creo una istanza della classe Display 
-		
+		testImg = ImageLoader.loadImage("/textures/sheet.png");
 	}
 	
 	// aggiorna variabili, posizioni, oggetti, ecc.
@@ -53,6 +58,18 @@ public class Game implements Runnable {
 				return;
 			}
 		g = bs.getDrawGraphics();
+		// cancella lo schermo
+		g.clearRect(0, 0, widht, height);
+		// start drawing
+		
+			
+		g.drawImage(testImg, 0, 0, null);
+		
+		
+		// end drawing
+		bs.show();
+		g.dispose();
+		
 	}
 	
 	/* dentro la classe, o alla fine, deve esserci questo metodo (public void run() ).
@@ -85,7 +102,6 @@ public class Game implements Runnable {
 		while (running) {  
 			tick();
 			render();
-			System.out.println("GAME LOOP");
 		}
 		stop(); //stoppa il thread se ancora non è stoppato (running diventa false)
 				
