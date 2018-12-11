@@ -63,7 +63,7 @@ public class Game implements Runnable {
 		// start drawing
 		
 			
-		g.drawImage(testImg, 0, 0, null);
+		
 		
 		
 		// end drawing
