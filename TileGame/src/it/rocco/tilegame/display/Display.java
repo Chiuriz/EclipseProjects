@@ -50,5 +50,6 @@ import java.awt.Dimension;
 	public Canvas getCanvas() {
 		return canvas;
 	}
+	//prova vaoar
 	
 }
