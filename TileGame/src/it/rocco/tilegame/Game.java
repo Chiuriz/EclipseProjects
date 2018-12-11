@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import it.rocco.tilegame.display.Display;
 import it.rocco.tilegame.gfx.ImageLoader;
+import it.rocco.tilegame.gfx.SpriteSheet;
 
 /* questa sarà la classe principale del gioco.
  * Viene chiamata dalla classe "Launcher".
@@ -24,9 +25,6 @@ public class Game implements Runnable {
 	private BufferStrategy bs;
 	private Graphics g;
 	
-	
-	private BufferedImage testImg;
-	
 	public Game (String title, int widht, int height) {
 		/* assegno i parametri che servono
 		 * a questa classe per far visualizzare il display */
@@ -41,7 +39,8 @@ public class Game implements Runnable {
 	public void init() {
 		
 		display = new Display (title, widht, height); // creo una istanza della classe Display 
-		testImg = ImageLoader.loadImage("/textures/sheet.png");
+		
+		
 	}
 	
 	// aggiorna variabili, posizioni, oggetti, ecc.
@@ -63,7 +62,6 @@ public class Game implements Runnable {
 		// start drawing
 		
 			
-		
 		
 		
 		// end drawing
