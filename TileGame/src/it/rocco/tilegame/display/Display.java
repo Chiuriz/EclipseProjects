@@ -13,7 +13,7 @@ import java.awt.Dimension;
 		private String title;
 		private int widht, height;
 	
-	//costruttore del frame. Riceve titolo, larghezza e altezza
+	//costruttore del frame. Riceve titolo, larghezza e altezza.
 	public Display (String title, int widht, int height) {
 		this.title = title;
 		this.widht = widht;
