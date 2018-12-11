@@ -6,6 +6,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import it.rocco.tilegame.display.Display;
+import it.rocco.tilegame.gfx.Assets;
 import it.rocco.tilegame.gfx.ImageLoader;
 import it.rocco.tilegame.gfx.SpriteSheet;
 
@@ -39,7 +40,7 @@ public class Game implements Runnable {
 	public void init() {
 		
 		display = new Display (title, widht, height); // creo una istanza della classe Display 
-		
+		Assets.init();
 		
 	}
 	
@@ -61,8 +62,11 @@ public class Game implements Runnable {
 		g.clearRect(0, 0, widht, height);
 		// start drawing
 		
-			
-		
+		g.drawImage(Assets.player, 0, 0, null);
+		g.drawImage(Assets.dirt, 33, 0, null);
+		g.drawImage(Assets.grass, 66, 0, null);
+		g.drawImage(Assets.stone, 0, 33, null);
+		g.drawImage(Assets.tree, 33, 33, null);
 		
 		// end drawing
 		bs.show();
@@ -95,6 +99,7 @@ public class Game implements Runnable {
 	public void run () {
 		//richiama il metodo init che inizializza la grafica del gioco
 		init(); 
+		
 		
 		// inizia il game loop (running diventa true) che richiama i metodi "update" e "render"
 		while (running) {  
