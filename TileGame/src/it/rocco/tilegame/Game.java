@@ -67,6 +67,8 @@ public class Game implements Runnable {
 		g.drawImage(Assets.grass, 66, 0, null);
 		g.drawImage(Assets.stone, 0, 33, null);
 		g.drawImage(Assets.tree, 33, 33, null);
+		g.drawImage(Assets.tree, 66, 66, null);
+		
 		
 		// end drawing
 		bs.show();

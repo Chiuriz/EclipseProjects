@@ -18,8 +18,6 @@ public class Assets {
 		stone = sheet.crop(widht * 3, 0, widht, height);
 		tree = sheet.crop(0, height, widht, height);
 		
-		
-
 	}
 	
 }
