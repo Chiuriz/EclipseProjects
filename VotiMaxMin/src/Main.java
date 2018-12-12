@@ -9,28 +9,15 @@ public class Main {
 		voti = new int[10];
 		float media;
 		
-		//inserisce i valori nel vettore
-		
-	//	try 
-	//	{
 
-			for (i=0; i<10; i++) 
-			
-			{	
-				do 
-				{
-					System.out.print("Inserisci il " + (i+1) +" voto: ");
-					voti[i] = lettore.nextInt();
+			for (i=0; i<10; i++) {	
+				do {
+				 System.out.print("Inserisci il " + (i+1) +" voto: ");
+				voti[i] = lettore.nextInt();
 				}
-					while (voti[i] <0 || voti[i] >10);	
-				}
+				while (voti[i] <0 || voti[i] >10);	
+			}
 				
-		//}
-		//catch (java.util.InputMismatchException e) 
-		//{
-		//	System.out.println("DEVI INSERIRE UN NUMERO!");
-		//}
-		//lettore.close();
 		
 		//calcolo del voto medio
 		media=0;
