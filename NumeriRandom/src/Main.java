@@ -26,7 +26,7 @@ public class Main {
 			catch (Exception e) {
 				
 				System.out.println("DEVI INSERIRE UN NUMERO! ");
-				return;
+				
 			}
 		
 			ins.close();
