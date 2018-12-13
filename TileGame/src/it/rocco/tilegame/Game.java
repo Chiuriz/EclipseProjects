@@ -12,10 +12,7 @@ import it.rocco.tilegame.gfx.SpriteSheet;
 import it.rocco.tilegame.state.GameState;
 import it.rocco.tilegame.state.State;
 
-/* questa sarà la classe principale del gioco.
- * Viene chiamata dalla classe "Launcher".
- * Qui verrà scritto il codice che farà girare
- * il gioco, lo visualizzerà, lo stopperà, ecc. */
+
 
 // con "implements Runnable" permetto alla classe di essere eseguita all'interno di un thread
 public class Game implements Runnable {
@@ -147,6 +144,7 @@ public class Game implements Runnable {
 		thread.start();
 		
 	}
+	
 	public synchronized void stop() {
 		//controlla se il gioco è gia stoppato (not running [!running oppure running=false]) e in quel caso ignora tutto il resto
 		if (!running)

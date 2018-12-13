@@ -26,6 +26,7 @@ import java.awt.Dimension;
 	private void createDisplay() {
 		// assegno i parametri all'oggetto frame.
 		frame = new JFrame (title);
+		
 		frame.setSize (widht, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
