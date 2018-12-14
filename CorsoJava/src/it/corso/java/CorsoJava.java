@@ -7,13 +7,15 @@ public class CorsoJava {
 	public String s3;
 	public int i;
 	
-	public void esegui () {		
+	public void esegui () {	
+		
 		s3 = s1.concat(s2);
-		s3 = s3.replaceAll("A", " ");
-		s3 = s3.replaceAll("E", " ");
-		s3 = s3.replaceAll("I", " ");
-		s3 = s3.replaceAll("O", " ");
-		s3 = s3.replaceAll("U", " ");
+		s3 = s3.replaceAll("A", "");
+		s3 = s3.replaceAll("E", "");
+		s3 = s3.replaceAll("I", "");
+		s3 = s3.replaceAll("O", "");
+		s3 = s3.replaceAll("U", "");
+		
 			
 		for (i=0; i < s3.length(); i++) {
 			System.out.print(s3.charAt(i));
