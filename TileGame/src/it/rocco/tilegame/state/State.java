@@ -2,6 +2,8 @@ package it.rocco.tilegame.state;
 
 import java.awt.Graphics;
 
+import it.rocco.tilegame.Game;
+
 public abstract class State {
 	
 	
@@ -20,14 +22,16 @@ public abstract class State {
 	public static State getState() {
 		return currentState;
 	}
+
+	//class
 	
+	protected Game game;
 	
+	public State (Game game) {
+		this.game = game;
+	}
 	
-	
-	
-	// abstract class
 	public abstract void tick ();
-	
 	public abstract void render (Graphics g);
 	
 

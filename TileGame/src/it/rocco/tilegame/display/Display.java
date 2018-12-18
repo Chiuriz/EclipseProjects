@@ -41,6 +41,7 @@ import java.awt.Dimension;
 		 * il canvas mantenga sempre le proporzioni della finestra */
 		canvas.setMaximumSize(new Dimension (widht, height));
 		canvas.setMinimumSize(new Dimension (widht, height));
+		canvas.setFocusable(false);
 		// aggiunge il canvas al frame
 		frame.add(canvas); 
 		// questo metodo serve per essere sicuri che il canvas venga visualizzato completamente nel frame
@@ -52,4 +53,7 @@ import java.awt.Dimension;
 		return canvas;
 	}
 	
+	public JFrame getFrame() {
+		return frame;
+	}
 }

@@ -9,6 +9,7 @@ import it.rocco.tilegame.display.Display;
 import it.rocco.tilegame.gfx.Assets;
 import it.rocco.tilegame.gfx.ImageLoader;
 import it.rocco.tilegame.gfx.SpriteSheet;
+import it.rocco.tilegame.input.KeyManager;
 import it.rocco.tilegame.state.GameState;
 import it.rocco.tilegame.state.MenuState;
 import it.rocco.tilegame.state.State;
@@ -30,6 +31,9 @@ public class Game implements Runnable {
 	private State gameState;
 	private State menuState;
 	
+	//input
+	private KeyManager keyManager;
+	
 	
 	public Game (String title, int widht, int height) {
 		/* assegno i parametri che servono
@@ -37,6 +41,7 @@ public class Game implements Runnable {
 		this.widht = widht;
 		this.height = height;
 		this.title = title;
+		keyManager = new KeyManager();
 	}
 	
 	/* questo metodo verrà eseguito una volta ogni volta che il metodo "run" lo chiamerà 
@@ -45,10 +50,11 @@ public class Game implements Runnable {
 	public void init() {
 		
 		display = new Display (title, widht, height); // creo una istanza della classe Display 
+		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
 		
-		gameState = new GameState();
-		menuState = new MenuState();
+		gameState = new GameState(this);
+		menuState = new MenuState(this);
 		
 		State.setState(gameState);
 		
@@ -56,6 +62,7 @@ public class Game implements Runnable {
 	
 	public void tick () {
 		
+		keyManager.tick();
 		if (State.getState() != null) // se lo stato recuperato non è uguale a null
 			State.getState().tick();  // chiama il metodo "tick" del current state
 		
@@ -126,6 +133,9 @@ public class Game implements Runnable {
 				
 	}
 	
+	public KeyManager getKeyManager() {
+		return keyManager;
+	}
 	/* i seguenti due metodi fanno partire o stoppare il
 	 * thread che nel frattempo ho dichiarato nelle variabili (nota 1)
 	 * la keyword "synchronized" di questi metodi si dovrebbe
