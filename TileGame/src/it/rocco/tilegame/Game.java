@@ -10,6 +10,7 @@ import it.rocco.tilegame.gfx.Assets;
 import it.rocco.tilegame.gfx.ImageLoader;
 import it.rocco.tilegame.gfx.SpriteSheet;
 import it.rocco.tilegame.state.GameState;
+import it.rocco.tilegame.state.MenuState;
 import it.rocco.tilegame.state.State;
 
 
@@ -27,6 +28,8 @@ public class Game implements Runnable {
 	
 	//states
 	private State gameState;
+	private State menuState;
+	
 	
 	public Game (String title, int widht, int height) {
 		/* assegno i parametri che servono
@@ -45,17 +48,16 @@ public class Game implements Runnable {
 		Assets.init();
 		
 		gameState = new GameState();
+		menuState = new MenuState();
+		
 		State.setState(gameState);
 		
 	}
 	
-
-
-	// aggiorna variabili, posizioni, oggetti, ecc.
 	public void tick () {
 		
-		if (State.getState() != null)
-			State.getState().tick();
+		if (State.getState() != null) // se lo stato recuperato non è uguale a null
+			State.getState().tick();  // chiama il metodo "tick" del current state
 		
 	}
 	
@@ -70,12 +72,14 @@ public class Game implements Runnable {
 		g = bs.getDrawGraphics();
 		// cancella lo schermo
 		g.clearRect(0, 0, widht, height);
+		
 		// start drawing
 		
 		if (State.getState() != null)
 		State.getState().render(g);
 	
 		// end drawing
+		
 		bs.show();
 		g.dispose();
 		
