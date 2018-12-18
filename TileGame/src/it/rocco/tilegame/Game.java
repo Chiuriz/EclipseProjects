@@ -36,8 +36,6 @@ public class Game implements Runnable {
 	
 	
 	public Game (String title, int widht, int height) {
-		/* assegno i parametri che servono
-		 * a questa classe per far visualizzare il display */
 		this.widht = widht;
 		this.height = height;
 		this.title = title;
@@ -78,18 +76,15 @@ public class Game implements Runnable {
 			}
 		g = bs.getDrawGraphics();
 		// cancella lo schermo
-		g.clearRect(0, 0, widht, height);
-		
+		g.clearRect(0, 0, widht, height);		
 		// start drawing
 		
 		if (State.getState() != null)
 		State.getState().render(g);
 	
-		// end drawing
-		
+		// end drawing	
 		bs.show();
-		g.dispose();
-		
+		g.dispose();	
 	}
 	
 	
