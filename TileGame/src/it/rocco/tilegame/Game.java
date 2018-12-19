@@ -1,14 +1,11 @@
 package it.rocco.tilegame;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
 import it.rocco.tilegame.display.Display;
 import it.rocco.tilegame.gfx.Assets;
-import it.rocco.tilegame.gfx.ImageLoader;
-import it.rocco.tilegame.gfx.SpriteSheet;
+import it.rocco.tilegame.gfx.GameCamera;
 import it.rocco.tilegame.input.KeyManager;
 import it.rocco.tilegame.state.GameState;
 import it.rocco.tilegame.state.MenuState;
@@ -20,7 +17,7 @@ import it.rocco.tilegame.state.State;
 public class Game implements Runnable {
 	
 	private Display display;
-	public int widht, height;
+	private int widht, height;
 	public String title;
 	private Thread thread; // (nota 1) se permetto alla classe il "runnable" devo creare questo oggetto di tipo thread
 	private boolean running = false; //controlla il gameloop
@@ -33,6 +30,9 @@ public class Game implements Runnable {
 	
 	//input
 	private KeyManager keyManager;
+	
+	//camera
+	private GameCamera gameCamera;
 	
 	
 	public Game (String title, int widht, int height) {
@@ -51,12 +51,15 @@ public class Game implements Runnable {
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
 		
+		gameCamera = new GameCamera (this,0,0);
+		
 		gameState = new GameState(this);
 		menuState = new MenuState(this);
 		
 		State.setState(gameState);
 		
 	}
+	
 	
 	public void tick () {
 		
@@ -131,10 +134,19 @@ public class Game implements Runnable {
 	public KeyManager getKeyManager() {
 		return keyManager;
 	}
-	/* i seguenti due metodi fanno partire o stoppare il
-	 * thread che nel frattempo ho dichiarato nelle variabili (nota 1)
-	 * la keyword "synchronized" di questi metodi si dovrebbe
-	 * usare sempre quando si ha a che fare con i Thread */
+	
+	public GameCamera getGameCamera() {
+		return gameCamera;
+	}
+	
+	public int getWidht() {
+		return widht;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
 	
 	public synchronized void start() {
 		//controlla se il gioco è gia avviato e in quel caso ignora tutto il resto

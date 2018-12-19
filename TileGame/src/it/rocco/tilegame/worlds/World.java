@@ -2,16 +2,19 @@ package it.rocco.tilegame.worlds;
 
 import java.awt.Graphics;
 
+import it.rocco.tilegame.Game;
 import it.rocco.tilegame.tiles.Tile;
 import it.rocco.tilegame.utils.Utils;
 
 public class World {
 	
+	private Game game;
 	private int width, height;
 	private int spawnX, spawnY;
 	private int [][] tiles;
 			
-	public World (String path) {
+	public World (Game game, String path) {
+		this.game = game;
 		loadWorld(path);
 	}
 	
@@ -20,9 +23,16 @@ public class World {
 	}
 	
 	public void render (Graphics g) {
-		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
-				getTile(x,y).render(g, x * Tile.TILEWIDTH, y * Tile.TILEHEIGHT);
+		
+		int xStart = (int) Math.max(0, game.getGameCamera().getxOffset() / Tile.TILEWIDTH);
+		int xEnd = (int) Math.min(width, (game.getGameCamera().getxOffset() + game.getWidht()) / Tile.TILEWIDTH + 1);
+		int yStart = (int) Math.max(0, game.getGameCamera().getyOffset() / Tile.TILEHEIGHT);
+		int yEnd = (int) Math.min(height, (game.getGameCamera().getyOffset() + game.getHeight()) / Tile.TILEHEIGHT + 1);
+		 
+		for (int y = yStart; y < yEnd; y++) {
+			for (int x = xStart; x < xEnd; x++) {
+				getTile(x,y).render(g, (int)(x * Tile.TILEWIDTH - game.getGameCamera().getxOffset()),
+											(int) (y * Tile.TILEHEIGHT - game.getGameCamera().getyOffset()));
 			}
 		}
 	}

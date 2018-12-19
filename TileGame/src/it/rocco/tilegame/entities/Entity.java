@@ -1,13 +1,17 @@
 package it.rocco.tilegame.entities;
+
 import java.awt.Graphics;
+import it.rocco.tilegame.Game;
 
 public abstract class Entity {
 	
+	protected Game game;
 	protected float x, y;
 	protected int widht, height;
 	
 	
-	public Entity (float x, float y, int widht, int height) {	
+	public Entity (Game game, float x, float y, int widht, int height) {	
+		this.game = game;
 		this.x = x;
 		this.y = y;
 		this.widht = widht;

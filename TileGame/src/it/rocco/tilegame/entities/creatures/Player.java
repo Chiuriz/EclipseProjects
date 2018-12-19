@@ -7,18 +7,16 @@ import it.rocco.tilegame.gfx.Assets;
 import it.rocco.tilegame.tiles.Tile;
 
 public class Player extends Creature {
-
-	private Game game;
 	
 	public Player(Game game, float x, float y) {
-		super(x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
-		this.game = game;
+		super(game, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
 	}
 
 	@Override
 	public void tick() {
 		getInput();
 		move();
+		game.getGameCamera().centerOnEntity(this);
 	}
 	
 	public void getInput () {
@@ -43,7 +41,8 @@ public class Player extends Creature {
 	/* uso il cast (int) perchè il metodo drawImage prende in ingresso int mentre
 	 * x ed y di queste classi sono float (vedi classe madre Entity) */
 	public void render(Graphics g) {
-		g.drawImage(Assets.player, (int)x, (int)y, widht, height, null); 
+		g.drawImage(Assets.player, (int) (x - game.getGameCamera().getxOffset()), 
+									(int) (y - game.getGameCamera().getyOffset()), widht, height, null); 
 	}
 
 }
