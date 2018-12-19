@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import it.rocco.tilegame.Game;
 import it.rocco.tilegame.gfx.Assets;
+import it.rocco.tilegame.tiles.Tile;
 
 public class Player extends Creature {
 
@@ -35,6 +36,7 @@ public class Player extends Creature {
 			xMove = -speed;
 		if (game.getKeyManager().right)
 			xMove = speed;
+
 	}
 
 	@Override
