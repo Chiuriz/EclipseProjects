@@ -27,7 +27,7 @@ public class Main {
 			media = media/10;
 		}
 		
-		media = media + media;
+		media = media + media/10;
 		System.out.println("Il voto medio è: " + media);
 		
 		//calcolo del voto minimo e massimo
