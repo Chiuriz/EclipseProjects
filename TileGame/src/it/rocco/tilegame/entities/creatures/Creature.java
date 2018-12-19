@@ -1,6 +1,7 @@
 package it.rocco.tilegame.entities.creatures;
 
 import it.rocco.tilegame.Game;
+import it.rocco.tilegame.Handler;
 import it.rocco.tilegame.entities.Entity;
 
 public abstract class Creature extends Entity {
@@ -14,8 +15,8 @@ public abstract class Creature extends Entity {
 	protected float speed;
 	protected float xMove, yMove;
 	
-	public Creature(Game game, float x, float y, int widht, int height) {
-		super(game, x, y, widht, height);
+	public Creature(Handler handler, float x, float y, int widht, int height) {
+		super(handler, x, y, widht, height);
 		health = DEFAULT_HEALT;
 		speed = DEFAULT_SPEED;
 		xMove = 0;

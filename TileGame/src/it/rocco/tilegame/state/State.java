@@ -3,6 +3,7 @@ package it.rocco.tilegame.state;
 import java.awt.Graphics;
 
 import it.rocco.tilegame.Game;
+import it.rocco.tilegame.Handler;
 
 public abstract class State {
 	
@@ -25,10 +26,10 @@ public abstract class State {
 
 	//class
 	
-	protected Game game;
+	protected Handler handler;
 	
-	public State (Game game) {
-		this.game = game;
+	public State (Handler handler) {
+		this.handler = handler;
 	}
 	
 	public abstract void tick ();

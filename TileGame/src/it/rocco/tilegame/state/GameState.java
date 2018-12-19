@@ -3,6 +3,7 @@ package it.rocco.tilegame.state;
 import java.awt.Graphics;
 
 import it.rocco.tilegame.Game;
+import it.rocco.tilegame.Handler;
 import it.rocco.tilegame.entities.creatures.Player;
 import it.rocco.tilegame.tiles.Tile;
 import it.rocco.tilegame.worlds.World;
@@ -18,10 +19,12 @@ public class GameState extends State {
 	private Player player;
 	private World world;
 
-	public GameState(Game game) {
-		super(game);
-		player = new Player(game,100,100);
-		world = new World (game, "res/worlds/world1.txt");
+	public GameState(Handler handler) {
+		super(handler);
+		world = new World (handler, "res/worlds/world1.txt");
+		handler.setWorld(world);
+		player = new Player(handler,100,100);
+		
 		
 		
 	}
