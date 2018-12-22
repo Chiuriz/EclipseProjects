@@ -20,22 +20,19 @@ public class Game implements Runnable {
 	private int widht, height;
 	public String title;
 	private Thread thread; // (nota 1) se permetto alla classe il "runnable" devo creare questo oggetto di tipo thread
-	private boolean running = false; //controlla il gameloop
+	private boolean running = false;
 	private BufferStrategy bs;
 	private Graphics g;
-	
 	//states
 	private State gameState;
 	private State menuState;
-	
 	//input
 	private KeyManager keyManager;
-	
 	//camera
 	private GameCamera gameCamera;
-	
 	//handler
 	private Handler handler;
+	
 	
 	
 	public Game (String title, int widht, int height) {
@@ -45,8 +42,8 @@ public class Game implements Runnable {
 		keyManager = new KeyManager();
 	}
 	
-	/* questo metodo verrà eseguito una volta ogni volta che il metodo "run" lo chiamerà 
-	 * ed inizializzerà tutta la grafica */
+	/* questo metodo verrà eseguito una sola volta dopo che il metodo "run" lo chiamerà 
+	 * ed inizializzerà tutto. */
 	
 	public void init() {
 		
@@ -60,17 +57,14 @@ public class Game implements Runnable {
 		gameState = new GameState(handler);
 		menuState = new MenuState(handler);
 		
-		State.setState(gameState);
-		
+		State.setState(gameState);	
 	}
 	
 	
 	public void tick () {
-		
 		keyManager.tick();
 		if (State.getState() != null) // se lo stato recuperato non è uguale a null
-			State.getState().tick();  // chiama il metodo "tick" del current state
-		
+			State.getState().tick();  // chiama il metodo "tick" del current state	
 	}
 	
 	// disegna tutto sul canvas dopo l'update
@@ -125,7 +119,7 @@ public class Game implements Runnable {
 			}
 			
 			if(timer >= 1000000000) {
-				System.out.println("FPS: " + ticks);
+				System.out.println("TPS: " + ticks);
 				ticks = 0;
 				timer = 0;
 			}
